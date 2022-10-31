@@ -35,10 +35,8 @@ import router from './routes';
   app.use(morgan('combined'));
 
   //Home page
-  app.get("/", (req, res) => {
+  app.get("/me", (req, res) => {
     res.send({
-      code: 200,
-      message: "Server running....",
       slackUsername: "Jeremiah Patrick",
       backend: true,
       age: 23,
