@@ -8,7 +8,7 @@ It's a yearly free internship to develop developers or individuals who are inter
 #### Stage 2🚀:
 - Create a **(POST)** api endoint that takes the following sample json:
      { "**operation_type**": Enum< addition | subtraction | multiplication>, "**x**": Number and Integer, "**y**": Number and Integer}
-   and returns the following  json response:
+     and returns the following  json response:
      { "**slackUsername**": String, "**operation_type**": Enum< addition | subtraction | multiplication>, "**result**": Integer}
 
      - **Bonus_section**:
