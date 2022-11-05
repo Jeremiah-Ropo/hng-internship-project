@@ -123,7 +123,6 @@ import router from './routes';
         })
       }
     }
-
     if (req.body.operation_type.match(/(\d+)/g).length === 2) {
 
       if (req.body.operation_type.includes("multiplication") || req.body.operation_type.includes("multiply")) {
