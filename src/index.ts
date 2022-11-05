@@ -44,6 +44,41 @@ import router from './routes';
     });
   })
 
+  app.post("/operation", (req, res) => {
+   
+
+    if(req.body.operation_type === "addition"){
+      let result = parseInt(req.body.x) + parseInt(req.body.y);
+      res.send({
+        slackUsername: "Jeremiah Patrick",
+        operation_type: req.body.operation_type,
+        result: result
+      })
+    }
+    else if(req.body.operation_type === "subtraction"){
+      let result = parseInt(req.body.x) - parseInt(req.body.y);
+      res.send({
+        slackUsername: "Jeremiah Patrick",
+        operation_type: req.body.operation_type,
+        result: result
+      })
+    }
+    else if(req.body.operation_type === "multiplication"){
+      let result = parseInt(req.body.x) * parseInt(req.body.y);
+      res.send({
+        slackUsername: "Jeremiah Patrick",
+        operation_type: req.body.operation_type,
+        result: result
+      })
+    }
+    else{
+      res.send({
+        errorMessage:"Enter a proper operation type"
+      })
+    };
+   
+  })
+
   //Routers.
   app.use('/', router)
   // Handle unwanted routes.
