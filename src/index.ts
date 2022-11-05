@@ -21,7 +21,7 @@ import router from './routes';
   app.use(helmet());
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
- 
+
 
   //Logs
   try {
@@ -45,9 +45,9 @@ import router from './routes';
   })
 
   app.post("/operation", (req, res) => {
-   
 
-    if(req.body.operation_type === "addition"){
+    if (req.body.operation_type === "addition") {
+      
       let result = parseInt(req.body.x) + parseInt(req.body.y);
       res.send({
         slackUsername: "Jeremiah Patrick",
@@ -55,7 +55,9 @@ import router from './routes';
         result: result
       })
     }
-    else if(req.body.operation_type === "subtraction"){
+
+    if (req.body.operation_type === "subtraction") {
+      
       let result = parseInt(req.body.x) - parseInt(req.body.y);
       res.send({
         slackUsername: "Jeremiah Patrick",
@@ -63,7 +65,7 @@ import router from './routes';
         result: result
       })
     }
-    else if(req.body.operation_type === "multiplication"){
+    if (req.body.operation_type === "multiplication") {
       let result = parseInt(req.body.x) * parseInt(req.body.y);
       res.send({
         slackUsername: "Jeremiah Patrick",
@@ -71,18 +73,116 @@ import router from './routes';
         result: result
       })
     }
-    else{
+/////////////// Bonus ////////////
+    if (req.body.operation_type.match(/(\d+)/g).length === 3) {
+      if (req.body.operation_type.includes("multiplication") || req.body.operation_type.includes("multiply")) {
+        
+        let split = req.body.operation_type.match(/(\d+)/g)
+        let [a, b, c] = split;
+
+        a = parseFloat(a.trim());
+        b = parseFloat(b.trim());
+        c = parseFloat(c.trim());
+        let result = (a * b * c);
+        res.send({
+          slackUsername: "Jeremiah Patrick",
+          operation_type: "multiplication",
+          result: result
+        })
+      }
+
+      if (req.body.operation_type.includes("subtraction") || req.body.operation_type.includes("subtract")) {
+        
+        let split = req.body.operation_type.match(/(\d+)/g)
+        let [a, b, c] = split;
+
+        a = parseFloat(a.trim());
+        b = parseFloat(b.trim());
+        c = parseFloat(c.trim());
+        let result = (a - b - c);
+        res.send({
+          slackUsername: "Jeremiah Patrick",
+          operation_type: "subtraction",
+          result: result
+        })
+      }
+
+      if (req.body.operation_type.includes("addition") || req.body.operation_type.includes("add")) {
+        
+        let split = req.body.operation_type.match(/(\d+)/g);
+        let [a, b, c] = split;
+
+        a = parseFloat(a.trim());
+        b = parseFloat(b.trim());
+        c = parseFloat(c.trim());
+        let result = (a + b + c);
+        res.send({
+          slackUsername: "Jeremiah Patrick",
+          operation_type: "addition",
+          result: result
+        })
+      }
+    }
+
+    if (req.body.operation_type.match(/(\d+)/g).length === 2) {
+
+      if (req.body.operation_type.includes("multiplication") || req.body.operation_type.includes("multiply")) {
+        
+        let split = req.body.operation_type.match(/(\d+)/g)
+        let [a, b] = split;
+
+        a = parseFloat(a.trim());
+        b = parseFloat(b.trim());
+        let result = (a * b);
+        res.send({
+          slackUsername: "Jeremiah Patrick",
+          operation_type: "multiplication",
+          result: result
+        })
+      }
+
+      if (req.body.operation_type.includes("subtraction") || req.body.operation_type.includes("subtract")) {
+        
+        let split = req.body.operation_type.match(/(\d+)/g);
+        let [a, b] = split;
+
+        a = parseFloat(a.trim());
+        b = parseFloat(b.trim());
+        let result = (a - b);
+        res.send({
+          slackUsername: "Jeremiah Patrick",
+          operation_type: "subtraction",
+          result: result
+        })
+      }
+
+      if (req.body.operation_type.includes("addition") || req.body.operation_type.includes("add")) {
+
+        let split = req.body.operation_type.match(/(\d+)/g);
+        let [a, b] = split;
+
+        a = parseFloat(a.trim());
+        b = parseFloat(b.trim());
+        let result = (a + b);
+        res.send({
+          slackUsername: "Jeremiah Patrick",
+          operation_type: "addition",
+          result: result
+        })
+      }
+    }
+    else {
       res.send({
-        errorMessage:"Enter a proper operation type"
+        errorMessage: "Enter a proper operation type"
       })
     };
-   
+
   })
 
   //Routers.
   app.use('/', router)
   // Handle unwanted routes.
-  app.use('/*', (req, res)=>{
+  app.use('/*', (req, res) => {
     res.status(404).json({
       message: 'Lol, you passed a wrong route',
       route: req.originalUrl,
