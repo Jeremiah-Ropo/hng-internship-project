@@ -1,16 +1,24 @@
 {
     "version": 2,
+    "public": true,
     "builds": [
-        {
-            "src": "./dist/index.js",
-            "use": "@vercel/node",
-            "config": { "includeFiles": ["dist/**"] }
-        }
+      {
+        "src": "src/index.ts",
+        "use": "@vercel/node"
+      }
     ],
     "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "./dist/index.js"
-        }
+      {
+        "src": "/robots.txt",
+        "status": 204
+      },
+      {
+        "src": "/favicon.ico",
+        "status": 204
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/src/index.ts"
+      }
     ]
-}
+  }
